@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rush01 - Function Flow with Descriptions</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            padding: 30px;
+            max-width: 1100px;
+            width: 100%;
+        }
+        h1 {
+            color: #1a2a4c;
+            text-align: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .mermaid text {
+            font-size: 14px !important;
+        }
+        .explanation {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .explanation h2 {
+            color: #1a2a4c;
+            margin-top: 20px;
+        }
+        .explanation code {
+            background-color: #e8eaf6;
+            color: #3f51b5;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rush01 - Function Call Flow with Descriptions</h1>
+        <div class="mermaid">
+            graph TD
+                subgraph "Program Flow"
+                    A["<b>main</b><br>Entry point. Manages the<br>overall program flow."]:::start
+                    B["<b>parse_input</b><br>Reads & validates the<br>user's input string."]:::validation
+                    C["<b>ft_create_table</b><br>Initializes the board<br>and starts the solver."]:::setup
+                    D["<b>solve_recursive</b><br>The 'Brain'. Tries combinations<br>using backtracking."]:::brain
+                    E["<b>is_valid</b><br>Checks for duplicates<br>in the current row & col."]:::helper
+                    F["<b>check_views</b><br>Verifies the final board<br>against all 16 clues."]:::validation
+                    G["<b>check_row_col</b><br>Checks clues for a<br>single row or column."]:::helper
+                    H["<b>count_visible</b><br>Counts visible boxes<br>in a single line."]:::helper
+                    J["<b>print_board</b><br>Displays the final<br>solved grid."]:::endp
+                end
+
+                A -- "1. Validate" --> B;
+                A -- "2. Setup" --> C;
+                C -- "3. Solve" --> D;
+                D -- "Checks move" --> E;
+                D -- "Recursion" --> D;
+                D -- "Board Full?<br>Final Check" --> F;
+                F -- "Checks lines" --> G;
+                G -- "Counts boxes" --> H;
+                A -- "4. Print" --> J;
+
+                classDef start fill:#81c784,color:#fff,stroke:#388e3c,stroke-width:2px;
+                classDef endp fill:#64b5f6,color:#fff,stroke:#1976d2,stroke-width:2px;
+                classDef setup fill:#fff176,color:#333,stroke:#fbc02d,stroke-width:2px;
+                classDef validation fill:#ffb74d,color:#333,stroke:#f57c00,stroke-width:2px;
+                classDef brain fill:#e57373,color:#fff,stroke:#d32f2f,stroke-width:2px;
+                classDef helper fill:#ce93d8,color:#fff,stroke:#7b1fa2,stroke-width:2px;
+        </div>
+
+        <div class="explanation">
+            <h2>The Journey of a Solution</h2>
+            <p>This flowchart shows the life of your program from start to finish. Each color represents a different kind of task.</p>
+            <ul>
+                <li><b style="color:#388e3c;">Green (Start):</b> The program begins in <code>main()</code>.</li>
+                <li><b style="color:#f57c00;">Orange (Validation):</b> These functions check if the input is correct (<code>parse_input</code>) or if the final board matches the clues (<code>check_views</code>).</li>
+                <li><b style="color:#fbc02d;">Yellow (Setup):</b> This function prepares the empty board before calling the main solver.</li>
+                <li><b style="color:#d32f2f;">Red (The Brain):</b> The core of the program. <code>solve_recursive()</code> is the intelligent part that tries every combination and backtracks when it hits a dead end.</li>
+                <li><b style="color:#7b1fa2;">Purple (Helpers):</b> These are smaller utility functions that the main brain uses to check rules and count visible boxes.</li>
+                <li><b style="color:#1976d2;">Blue (End):</b> If a solution is found, this function prints the final, beautiful result.</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>
+
+
